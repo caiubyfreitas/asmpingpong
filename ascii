@@ -1,0 +1,28 @@
+.model tiny
+.code
+org 100h
+
+main proc near
+
+mov ax,00
+mov cx,256d
+mov bx,0
+loop1:
+
+  mov ah,02h	; Outputs a character to the standard output device
+  mov dx,bx	; mov character number from cx to dx
+  int 21h	; dos interrupt 21h
+  
+  mov ah,00h	; Wait program to read the character from the keyboard
+  int 16h	; keyboard interrupt 
+  
+  inc bx	; increment bxloop: loop1
+
+mov ah,4ch	; dos funcion to terminate and return to dos
+mov al,00
+int 21h	; dos interrupt 21h  
+; add your code here
+
+ret
+endp
+end main
